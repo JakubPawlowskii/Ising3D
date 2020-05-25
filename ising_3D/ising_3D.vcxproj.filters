@@ -18,5 +18,13 @@
     <ClCompile Include="ising_3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ising_framework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ising_framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
