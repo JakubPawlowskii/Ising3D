@@ -113,6 +113,8 @@
       <GenerateAlternateCodePaths>KABYLAKE</GenerateAlternateCodePaths>
       <UseProcessorExtensions>KABYLAKE</UseProcessorExtensions>
       <Mtune>Kabylake</Mtune>
+      <Parallelization>true</Parallelization>
+      <OpenMP>GenerateParallelCode</OpenMP>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,6 +157,8 @@
       <GenerateAlternateCodePaths>KABYLAKE</GenerateAlternateCodePaths>
       <UseProcessorExtensions>KABYLAKE</UseProcessorExtensions>
       <Mtune>Kabylake</Mtune>
+      <Parallelization>true</Parallelization>
+      <OpenMP>GenerateParallelCode</OpenMP>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
