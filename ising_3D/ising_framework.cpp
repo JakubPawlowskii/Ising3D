@@ -63,6 +63,8 @@ void ising_framework::print_lattice_to_file(const string file_name) const
 		for (unsigned j = 0; j < lattice_dim_; j++)
 			for (unsigned k = 0; k < lattice_dim_; k++)
 				lattice_file << i << ";" << j << ";" << k << ";" << lattice_[index(i, j, k)] << endl;
+
+	lattice_file.close();
 }
 
 void ising_framework::spin_swap_energy_difference(const unsigned int x, const unsigned int y, const unsigned int z)
@@ -75,14 +77,34 @@ void ising_framework::spin_swap_energy_difference(const unsigned int x, const un
 
 double ising_framework::swap_probability() const
 {
-	return  exp(static_cast<double>(-dE_)/T_);
+	switch (dE_)
+	{
+	case -12: return boltzmann_factor_[0];
+
+	case -8: return boltzmann_factor_[1];
+
+	case -4: return boltzmann_factor_[2];
+
+	case 0: return boltzmann_factor_[3];
+
+	case 4: return boltzmann_factor_[4];
+
+	case 8: return boltzmann_factor_[5];
+
+	case 12: return boltzmann_factor_[6];
+	default:
+		{
+			cout<<endl<<"Unhandled dE value."<<endl;
+			return 1;
+		}
+	}
 }
 
 double ising_framework::magnetization() const
 {
 	auto sum = 0.0;
-	for(unsigned int i = 0; i < lattice_vol_; i++) sum+=lattice_[i];
-	return 1/static_cast<double>(lattice_vol_) *sum;
+	for (unsigned int i = 0; i < lattice_vol_; i++) sum += lattice_[i];
+	return 1 / static_cast<double>(lattice_vol_) * sum;
 }
 
 void ising_framework::simulate_mcs()
@@ -91,9 +113,7 @@ void ising_framework::simulate_mcs()
 		for (unsigned j = 0; j < lattice_dim_; j++)
 			for (unsigned k = 0; k < lattice_dim_; k++)
 			{
-				spin_swap_energy_difference(i,j,k);
-				if(dE_ <= 0 ||  to_double(next()) < swap_probability()) lattice_[index(i,j,k)] *= -1;
+				spin_swap_energy_difference(i, j, k);
+				if (dE_ <= 0 || to_double(next()) < swap_probability()) lattice_[index(i, j, k)] *= -1;
 			}
 }
-
-
